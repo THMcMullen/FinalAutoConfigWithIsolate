@@ -29,8 +29,8 @@ class core{
   int containerSize;
   int gridSize;
   double ratio;
-  int quality;
-  int area;
+  int area = 10;
+  int quality = 11;
   
   cam.camera camera;
   
@@ -244,11 +244,28 @@ class core{
   }
   
   update(){
-    
+    camera.update();
+    for (int i = 0; i < container.length; i++) {
+      for (int j = 0; j < container[i].length; j++) {
+        if (container[i][j] != null) {
+          container[i][j].update();
+        }
+      }
+    }
   }
   
   draw(){
+    Matrix4 viewMat = camera.getViewMat();
+
+    gl.clear(RenderingContext.COLOR_BUFFER_BIT | RenderingContext.DEPTH_BUFFER_BIT);
     
+    for (int i = 0; i < container.length; i++) {
+      for (int j = 0; j < container[i].length; j++) {
+        if (container[i][j] != null) {
+          container[i][j].draw(viewMat, projectionMat);
+        }
+      }
+    }
   }
   
 }

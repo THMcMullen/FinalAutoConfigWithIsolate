@@ -21,7 +21,7 @@ class camera{
   var orbitY = 0.0;
   var distance = 20.0;
   
-  Vector3 pos = new Vector3(380.0,-8.0,380.0);
+  Vector3 pos = new Vector3(380.0,-50.0,380.0);
   Vector3 direction = new Vector3(0.0,0.0,0.0);
   
   Vector3 vector = new Vector3(0.0,0.0,0.0);

@@ -547,15 +547,15 @@ class land_tile {
     init = true;
 
     runTime = new DateTime.now().difference(temp).inMilliseconds.abs();
-    
+    if(locX == 3 && locY == 3){
+      addWater();
+    }
   }
   
   addWater(){
     
-    if(waterState == 3){
-      blob = new contour_tracing(0.5, heightMap);
-    }
-    tileWater = new water(gl, blob, res, locX, locY, waterState);
+
+    tileWater = new water(gl, heightMap, res, locX, locY, waterState);
     
     waterRender = true;
         
@@ -620,24 +620,6 @@ class land_tile {
       }
     }
 
-    /*
-    for (int i = 0; i < res; i++) {   
-      for (int j = 0; j < res; j++) {
-        if (above != null && i == res - 1) {
-          tempList[res - 1][j] = above.heightMap[0][j ~/ (res / above.res)];
-        }
-        if (below != null && i == 0) {
-          tempList[0][j] = below.heightMap[below.res - 1][j ~/ (res / below.res)];
-        }
-        if (left != null && j == 0) {
-          tempList[i][0] = left.heightMap[i ~/ (res / left.res)][left.res - 1];
-        }
-        if (right != null && j == res - 1) {
-          tempList[i][res - 1] = right.heightMap[i ~/ (res / right.res)][0];
-        }
-      }
-    }
-    */
     heightMap = tempList;
     tempList = null;
     //CreateObject(landCon);
@@ -758,8 +740,9 @@ class land_tile {
   }
   
   update(){
-    if(waterState == 3 && tileWater != null){
-      if(tileWater.b != null){      
+    if(locX == 3 && locY == 3){
+      if(tileWater.map != null){  
+        //print("update");
         tileWater.waterUpdate();
       }
     }
